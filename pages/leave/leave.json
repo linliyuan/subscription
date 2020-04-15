@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "请假",
+  "usingComponents": {
+    "i-modal": "/components/iview_weapp/modal/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-button": "@vant/weapp/button/index"
+  }
+}

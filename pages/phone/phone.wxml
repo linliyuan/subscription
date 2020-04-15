@@ -1,0 +1,9 @@
+<!--pages/phone/phone.wxml-->
+<view>
+    <!--  搞个背景图  -->
+    <view></view>
+    <!-- 需要使用 button 来授权登录 -->
+    <i-button wx:if="{{canIUse}}" shape="circle" type="primary"  size="default" class="start_button"  bindgetuserinfo="getPhoneNumber" open-type="getPhoneNumber">授权手机号</i-button>
+    <view wx:else>请升级微信版本</view>
+    <i-toast id="toast" />
+</view>

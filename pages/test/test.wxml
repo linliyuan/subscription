@@ -1,0 +1,8 @@
+<!--pages/test/test.wxml-->
+<van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
+<van-calendar
+        show="{{ show }}"
+        type="range"
+        bind:close="onClose"
+        bind:confirm="onConfirm"
+/>

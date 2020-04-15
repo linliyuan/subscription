@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "个人中心",
+  "usingComponents": {
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "i-modal": "/components/iview_weapp/modal/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-switch": "@vant/weapp/switch/index",
+    "i-switch": "/components/iview_weapp/switch/index",
+    "i-cell": "/components/iview_weapp/cell/index"
+  }
+}

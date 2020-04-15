@@ -1,0 +1,10 @@
+<view>
+    <!--  搞个背景图  -->
+    <view></view>
+    <!-- 需要使用 button 来授权登录 -->
+    <i-button wx:if="{{canIUse}}" shape="circle" type="primary"  size="default" class="start_button"  bindgetuserinfo="startSb" open-type="getUserInfo">开启订阅</i-button>
+    <view wx:else>请升级微信版本</view>
+    <i-modal visible="{{ modalVisible }}" bind:ok="modalHandelOk" bind:cancel="modalHandelNo">
+        <view>出现错误了，是否反馈给开发人员</view>
+    </i-modal>
+</view>

@@ -1,0 +1,8 @@
+/* pages/index/index.wxss */
+.start_button {
+  position: fixed;
+  width: 80%;
+  bottom:0px;
+  z-index: -1;
+  padding-left: 10%;
+}

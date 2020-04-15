@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "WELCOME TO",
+  "usingComponents": {
+    "i-button": "/components/iview_weapp/button/index",
+    "i-toast": "/components/iview_weapp/toast/index"
+  }
+}

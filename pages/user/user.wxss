@@ -1,0 +1,20 @@
+/* pages/user/user.wxss */
+.heard {
+    display: flex;
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
+}
+.hear-avatar {
+    flex: 8;
+}
+.hear-text {
+    flex: 2;
+    font-size: 14px;
+}
+.heard-block {
+    height: 10px;
+    width: 100%;
+    background-color: #f7f8fa;
+}
+

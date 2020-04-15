@@ -1,0 +1,59 @@
+<!--pages/msg/msg.wxml-->
+<view>
+    <view class="msg_top">
+        <van-search
+                value="{{ value }}"
+                placeholder="请输入搜索关键词"
+                background="#fff"
+                use-action-slot
+                bind:change="onChange"
+                bind:search="onSearch"
+                shape="round"
+        >
+            <view slot="action" bind:tap="onClick">搜索</view>
+        </van-search>
+    </view>
+    <view class="msg_middle">
+        <view class="msg_list" wx:key="arrIndex" key="{{arrIndex}}" wx:for="{{arr}}" wx:for-index="arrIndex" wx:for-item="object">
+            <view wx:key="index" key="{{index}}" wx:for="{{object}}" wx:for-index="index" wx:for-item="item" >
+                <view class="msg-card">
+                    <view class="msg-card-heard">
+                        <view class="msg-card-heard-content">
+                            <view class="msg-card-heard-content-img">
+                                <van-image
+                                        round
+                                        cover
+                                        lazy-load
+                                        width="3.5rem"
+                                        height="3.5rem"
+                                        src="https://img.yzcdn.cn/vant/cat.jpeg"
+                                />
+                            </view>
+                            <view class="msg-card-heard-content-text">
+                                <view>
+                                    <view class="msg-card-heard-content-text-title">{{ item }}</view>
+                                    <view class="msg-card-heard-content-text-msg">{{ item }}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="msg-card-header-extra">{{ item }}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="msg_bottom">
+        <i-load-more tip="已经到底了" loading="{{ false }}" />
+    </view>
+    <view class="tab-bottom">
+        <van-tabbar :active="active" bind:change="tabBarChang">
+            <van-tabbar-item name="msg" icon="chat-o" info="99+">消息</van-tabbar-item>
+            <van-tabbar-item name="group" icon="cluster-o">联系人</van-tabbar-item>
+            <van-tabbar-item name="work" icon="apps-o">工作台</van-tabbar-item>
+            <van-tabbar-item name="user" icon="user-o">我的</van-tabbar-item>
+        </van-tabbar>
+    </view>
+    <i-modal visible="{{ modalVisible }}" bind:ok="modalHandelOk" bind:cancel="modalHandelNo">
+        <view>出现错误了，是否反馈给开发人员</view>
+    </i-modal>
+</view>

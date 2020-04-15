@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/leave/leave",
+    "pages/test/test",
+    "pages/user/user",
+    "pages/index/index",
+    "pages/msg/msg",
+    "pages/group/group",
+    "pages/phone/phone",
+    "pages/work/work"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "FirstWeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap73.json"
+}

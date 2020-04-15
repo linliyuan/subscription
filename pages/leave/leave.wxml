@@ -1,0 +1,50 @@
+<!--pages/leave/leave.wxml-->
+<view>
+    <view id="leaveForm">
+        <van-cell-group>
+            <van-cell required is-link title="请假类型" bind:click="onSelectShow" value="{{ leaveTypeValue }}"/>
+            <van-cell required title="选择日期区间" value="{{ leaveDate }}" bind:click="onDateShow" />
+            <van-calendar
+                    show="{{ leaveDateShow }}"
+                    type="range"
+                    bind:close="onDateClose"
+                    bind:confirm="onConfirm"
+            />
+            <van-cell required title="请假时长" value="{{ leaveDays }}" />
+            <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+            <van-field
+                    value="{{ leaveRemark }}"
+                    label="备注"
+                    type="textarea"
+                    placeholder="请输入备注"
+                    autosize
+                    border="{{ false }}"
+                    maxlength="500"
+                    bind:blur="serLeaveRemark"
+            />
+            <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+            <van-cell title="说明附件：最多上传三个"/>
+            <van-uploader
+                    accept="all"
+                    file-list="{{ fileList }}"
+                    bind:after-read="afterRead"
+                    max-count="3"
+                    upload-text="上传附件"
+                    upload-icon="more-o"
+            />
+            <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+        </van-cell-group>
+        <van-button type="info" bind:click="submit" block="true" size="large" round>提交申请</van-button>
+    </view>
+
+    <i-modal visible="{{ modalVisible }}" bind:ok="modalHandelOk" bind:cancel="modalHandelNo">
+        <view>出现错误了，是否反馈给开发人员</view>
+    </i-modal>
+    <van-action-sheet
+        show="{{ leaveTypeShow }}"
+        actions="{{ leaveTypes }}"
+        bind:close="onLeaveTypeClose"
+        bind:select="onLeaveTypeSelect"
+    />
+</view>
+

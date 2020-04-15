@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "消息",
+  "usingComponents": {
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "i-modal": "/components/iview_weapp/modal/index",
+    "van-search": "@vant/weapp/search/index",
+    "i-card": "/components/iview_weapp/card/index",
+    "van-image": "@vant/weapp/image/index",
+    "i-load-more": "/components/iview_weapp/load-more/index"
+  }
+}

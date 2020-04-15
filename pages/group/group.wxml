@@ -1,0 +1,14 @@
+<!--pages/group/group.wxml-->
+<view>
+    <view class="tab-bottom">
+        <van-tabbar active="{{ active }}" bind:change="tabBarChang">
+            <van-tabbar-item name="msg" icon="chat-o" info="99+">消息</van-tabbar-item>
+            <van-tabbar-item name="group" icon="cluster-o">联系人</van-tabbar-item>
+            <van-tabbar-item name="work" icon="apps-o">工作台</van-tabbar-item>
+            <van-tabbar-item name="user" icon="user-o">我的</van-tabbar-item>
+        </van-tabbar>
+    </view>
+    <i-modal visible="{{ modalVisible }}" bind:ok="modalHandelOk" bind:cancel="modalHandelNo">
+        <view>出现错误了，是否反馈给开发人员</view>
+    </i-modal>
+</view>
