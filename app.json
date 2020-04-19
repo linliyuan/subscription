@@ -1,14 +1,14 @@
 {
   "pages": [
+    "pages/user_info_complete/user_info_complete",
+    "pages/user/user",
     "pages/leave/leave",
     "pages/test/test",
-    "pages/user/user",
     "pages/index/index",
     "pages/msg/msg",
     "pages/group/group",
     "pages/phone/phone",
-    "pages/work/work",
-    "pages/user_info_complete/user_info_complete"
+    "pages/work/work"
   ],
   "window": {
     "backgroundTextStyle": "light",

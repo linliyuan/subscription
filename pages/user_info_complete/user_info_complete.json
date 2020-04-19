@@ -1,3 +1,12 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "个人中心",
+  "usingComponents": {
+    "i-modal": "/components/iview_weapp/modal/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
+  }
 }

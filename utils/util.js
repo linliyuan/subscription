@@ -33,7 +33,6 @@ const _post = function (url,data) {
 }
 
 const _asyncPost = function (url,data,app) {
-  console.log(app)
   return new Promise(function(resolve, reject) {
     wx.request({
       url: config.getConfig().adminHost + url,
@@ -43,12 +42,9 @@ const _asyncPost = function (url,data,app) {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success (res) {
-        console.log(res)
         resolve(requestResHandle(res))
       },
       fail (res) {
-        console.log("res",res)
-        console.log("app.data.modalVisible",app.data.modalVisible)
         if (typeof(app.data.modalVisible) != "undefined"){
           app.setData({
             modalVisible: true
