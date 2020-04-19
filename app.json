@@ -7,7 +7,8 @@
     "pages/msg/msg",
     "pages/group/group",
     "pages/phone/phone",
-    "pages/work/work"
+    "pages/work/work",
+    "pages/user_info_complete/user_info_complete"
   ],
   "window": {
     "backgroundTextStyle": "light",
