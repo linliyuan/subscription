@@ -1,6 +1,12 @@
 <!--pages/user/user.wxml-->
 <view>
     <view class="content">
+        <van-notice-bar
+                wx:if="{{isComplete == 0}}"
+                speed="40"
+                left-icon="volume-o"
+                text="请完善个人信息"
+        />
         <view class="heard">
             <view class="hear-avatar">
                 <van-image

@@ -12,8 +12,9 @@ Page({
     avatarUrl: "/static/img/default.jpg",
     nickName: "请重新登陆",
     schoolName: "未绑定学校",
-    subscribeStatus: false,
-    modalVisible: false
+    subscribeStatus: 0,
+    modalVisible: false,
+    isComplete: 0,
   },
 
   modalHandelOk: function () {
@@ -29,40 +30,32 @@ Page({
   },
 
   switchSubscribeMessage: async function (e){
-    let currentSubscribeStatus = !this.data.subscribeStatus
-    console.log("currentSubscribeStatus", currentSubscribeStatus)
+    let currentSubscribeStatus = this.data.subscribeStatus
     if (currentSubscribeStatus){
       // 执行的是关闭
-
+      subscribe.requestSubscribe(this, 0)
+      this.setData({
+        subscribeStatus: 0
+      })
     }else {
       // 执行订阅
-      subscribe.requestSubscribe()
+      let subscribeRes = await subscribe.wxSubscribe(this)
+      console.log(subscribeRes)
+      if(subscribeRes){
+        subscribe.requestSubscribe(this, 1)
+        this.setData({
+          subscribeStatus: 1
+        })
+      }
+
     }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
-    let userInfo = await user.getUserInfo(this)
-    console.log(userInfo)
-    if (userInfo) {
-      if (userInfo.nickName) {
-        this.setData({
-          nickName: userInfo.nickName,
-        })
-      }
-      if (userInfo.schoolName) {
-        this.setData({
-          school: userInfo.schoolName,
-        })
-      }
-      if (userInfo.subscribeStatus === 1) {
-        this.setData({
-          subscribeStatus: userInfo.subscribeStatus,
-        })
-      }
-    }
+  onLoad: function (options) {
+    user.getUserInfo(this)
   },
 
   /**

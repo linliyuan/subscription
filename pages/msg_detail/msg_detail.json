@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "消息详情",
+  "usingComponents": {
+    "i-modal": "/components/iview_weapp/modal/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-cell-group": "@vant/weapp/cell-group/index"
+  }
+}

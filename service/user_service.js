@@ -90,6 +90,7 @@ async function checkLoginAsync(app){
             console.log("getOpenid")
             const openid = await getOpenid(code,app);
             console.log("openid" , openid)
+            return openid;
         }
     }catch (e) {
         console.log(e)
@@ -100,7 +101,10 @@ async function checkLoginAsync(app){
  * 检测登陆
  */
 const checkLogin = function (app) {
-    checkLoginAsync(app)
+    return new Promise(function(resolve, reject) {
+        let openid = checkLoginAsync(app)
+        resolve(openid)
+    })
 }
 
 const getUserStatus = function(app) {
@@ -191,11 +195,9 @@ const setUserInfo = function(encryptedData,iv,app) {
 }
 
 const getUserInfo = async function (app) {
-    console.log("getUserInfo",app)
     let openid = wx.getStorageSync('openid')
-    console.log("openid",openid)
     if (openid === "") {
-        checkLogin()
+        openid = await checkLogin(app)
     }
     let userInfo = await util._asyncPost(
         "/user/get_user_info",
@@ -204,8 +206,12 @@ const getUserInfo = async function (app) {
         },
         app
     )
-    console.log("userInfo",userInfo)
-    return userInfo
+    let data = {}
+    data.nickName = userInfo.nickName ? userInfo.nickName : ""
+    data.schoolName = userInfo.schoolName ? userInfo.schoolName : ""
+    data.subscribeStatus = userInfo.subscribeStatus ? userInfo.subscribeStatus : 0
+    data.isComplete = userInfo.isComplete ? userInfo.isComplete : 0
+    app.setData(data)
 }
 
 module.exports = {

@@ -2,6 +2,7 @@
   "navigationBarTitleText": "WELCOME TO",
   "usingComponents": {
     "i-button": "/components/iview_weapp/button/index",
-    "i-modal": "/components/iview_weapp/modal/index"
+    "i-modal": "/components/iview_weapp/modal/index",
+    "van-image": "@vant/weapp/image/index"
   }
 }

@@ -1,5 +1,6 @@
 import config from "../utils/config"
 import util from "../utils/util"
+import user from "../service/user_service"
 
 const getSchoolList = async function (app){
     let res = await util._asyncPost("/school/school_list",{},app)
@@ -60,10 +61,63 @@ const getClassList = async function(app){
     }
 }
 
+const getCompleteUserInfo = async function (app) {
+    let openid = wx.getStorageSync('openid')
+    if (openid === "") {
+         openid = await user.checkLogin(app)
+    }
+    let userInfo = await util._asyncPost(
+        "/user/get_complete_user_info",
+        {
+            openid: openid,
+        },
+        app
+    )
+    app.setData({
+        isComplete: userInfo.isComplete,
+        nickName: userInfo.nickName,
+        realName: userInfo.realName,
+        miniPhone: userInfo.miniPhone,
+        birthday: userInfo.birthday,
+        genderValue: userInfo.genderValue,
+        identityValue: userInfo.identityValue,
+        schoolName: userInfo.schoolName,
+        departmentName: userInfo.departmentName,
+        className: userInfo.className,
+        majorName: userInfo.majorName,
+        "formData.realName": userInfo.realName,
+        "formData.miniPhone": userInfo.miniPhone,
+        "formData.birthday": userInfo.birthday,
+        "formData.gender": userInfo.gender,
+        "formData.schoolId": userInfo.schoolId,
+        "formData.departmentId": userInfo.departmentId,
+        "formData.majorId": userInfo.majorId,
+        "formData.classId": userInfo.classId,
+        "formData.identity": userInfo.identity,
+    })
+    return userInfo
+}
+
+const completeUserInfo = async function(completeData, app){
+    let res = await util._asyncPost(
+        "/user/complete_user_info",
+        completeData,
+        app
+    )
+    console.log(res)
+    if (res !== false){
+        wx.redirectTo({
+          url: '/pages/user/user'
+        })
+    }
+}
+
 
 module.exports = {
     getSchoolList: getSchoolList, // 获取学校列表
     getDepartmentList: getDepartmentList, // 获取对应院系列表
     getMajorList: getMajorList, // 获取对应专业列表
     getClassList: getClassList, // 获取对应的班级
+    getCompleteUserInfo: getCompleteUserInfo, // 获取用户完整信息
+    completeUserInfo: completeUserInfo, // 完善用户完整信息
 }

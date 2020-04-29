@@ -32,7 +32,7 @@ const _post = function (url,data) {
   })
 }
 
-const _asyncPost = function (url,data,app) {
+const _asyncPost = function (url, data, app) {
   return new Promise(function(resolve, reject) {
     wx.request({
       url: config.getConfig().adminHost + url,
@@ -42,7 +42,7 @@ const _asyncPost = function (url,data,app) {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success (res) {
-        resolve(requestResHandle(res))
+        resolve(requestResHandle(res, app))
       },
       fail (res) {
         if (typeof(app.data.modalVisible) != "undefined"){
@@ -73,7 +73,6 @@ const requestResHandle = function (res,app) {
           url: '/pages/index/index',
         })
     }
-    return false
     if (data.isShow === 1) {
       $Toast({
         type: 'fail',
@@ -113,11 +112,27 @@ const modalHandelNo = function(app){
   }
 }
 
+const formatDate = function(date) {
+  date = new Date(date);
+  return `${date.getMonth() + 1}/${date.getDate()}`;
+}
+
+function dateToDateString(date) {
+  let year  = date.getFullYear()
+  let month  = date.getMonth() + 1
+  if (month < 10){
+    month = "0" + month
+  }
+  let day  = date.getDate()
+  return year + "-" + month + "-" + day
+}
 
 module.exports = {
   _post: _post,
   _asyncPost: _asyncPost,
   requestResHandle: requestResHandle,
   modalHandelOk: modalHandelOk,
-  modalHandelNo: modalHandelNo
+  modalHandelNo: modalHandelNo,
+  formatDate: formatDate,
+  dateToDateString: dateToDateString
 };

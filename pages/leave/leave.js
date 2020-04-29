@@ -31,7 +31,7 @@ Page({
                 name: '其他',
             }
         ],
-        fileList: []
+        fileList: ["https://subscription-oss.oss-cn-beijing.aliyuncs.com/2020-04-25-140747-vCW4OJ.jpeg"]
     },
     // 上传文件
     afterRead(event) {
@@ -40,16 +40,16 @@ Page({
         const {file} = event.detail;
         let openid = wx.getStorageSync('openid');
         wx.uploadFile({
-            url: config.getConfig().adminHost + '/common/uploadFile', // 仅为示例，非真实的接口地址
+            url: config.getConfig().adminHost + '/common/uploadFile',
             filePath: file.path,
             name: 'file',
             formData: {openid: openid},
             success(res) {
-                let data = JSON.parse(res.data).data
-                console.log("上传结果:", data)
+                let resData = util.requestResHandle({data: JSON.parse(res.data)}, that)
+                console.log("上传结果:", resData)
                 // 上传完成需要更新 fileList
                 let fileList = that.data.fileList
-                fileList.push({...file, url: data.url});
+                fileList.push({...file, url: resData.url});
                 that.setData({fileList: fileList});
             },
             fail(res){
@@ -113,7 +113,27 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+      // console.log("xixi")
+      // wx.downloadFile({
+      //   // 示例 url，并非真实存在
+      //   url: 'https://subscription-oss.oss-cn-beijing.aliyuncs.com/2020-04-26-003046-KFL4Da.xlsx',
+      //   success: function (res) {
+      //     console.log("ooooo")
+      //     const filePath = res.tempFilePath
+      //     wx.openDocument({
+      //       filePath: filePath,
+      //       success: function (res) {
+      //         console.log('打开文档成功')
+      //       },
+      //       fail: function(res){
+      //         console.log(res)
+      //       }
+      //     })
+      //   },
+      //   fail: function (res) {
+      //     console.log(res)
+      //   }
+      // })
     },
 
     /**

@@ -10,6 +10,7 @@
     "van-icon": "@vant/weapp/icon/index",
     "van-switch": "@vant/weapp/switch/index",
     "i-switch": "/components/iview_weapp/switch/index",
-    "i-cell": "/components/iview_weapp/cell/index"
+    "i-cell": "/components/iview_weapp/cell/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
   }
 }

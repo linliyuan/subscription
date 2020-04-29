@@ -1,6 +1,7 @@
 // pages/user_info_complete/user_info_complete.js
 import util from "../../utils/util"
 import _service from "../../service/user_info_complete_service"
+import user_service from "../../service/user_service"
 
 Page({
 
@@ -8,11 +9,28 @@ Page({
    * 页面的初始数据
    */
   data: {
+    today: util.dateToDateString(new Date()),
+    isComplete: 0,
     modalVisible: false,
+    birthday: "",
+    birthdayShow: false,
+    genderSelectorShow: false,
+    genderColumns: [
+        {
+          id: 1,
+          name: "男"
+        },
+      {
+        id: 2,
+        name: "女"
+      }
+    ],
+
     schoolSelectorShow: false,
     departmentSelectorShow: false,
     majorSelectorShow: false,
     classSelectorShow: false,
+
 
     schoolName: "",
     departmentName: "",
@@ -37,11 +55,33 @@ Page({
     majorList: [],
     classList: [],
 
+
+    identitySelectorShow: false,
+    identityColumns: [
+      {
+        id: 1,
+        name: "学生"
+      },
+      {
+        id: 2,
+        name: "教师"
+      },
+      {
+        id: 3,
+        name: "普通职工"
+      }
+    ],
+
     formData: {
+      realName: "",
+      miniPhone: "",
+      birthday: "",
+      gender: 0,
       schoolId: 0,
       departmentId: 0,
       majorId: 0,
-      classId: 0
+      classId: 0,
+      identity: 0,
     },
 
 
@@ -54,9 +94,48 @@ Page({
   modalHandelNo: function(){
     util.modalHandelNo(this)
   },
+  // 修改手机号
+  onRealNameChange: function(event){
+    console.log(event.detail.value)
+    this.setData({
+      "formData.realName": event.detail.value
+    })
+  },
+  // 修改手机号
+  onMiniPhoneChange: function(event){
+    this.setData({
+      "formData.miniPhone": event.detail.value
+    })
+  },
+
+  // 生日
+  bindDateChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      birthday: e.detail.value,
+      "formData.birthday": e.detail.value,
+    })
+  },
+
+  // 选择性别
+  onSelectGenderShow: function(){
+    this.setData({
+      genderSelectorShow: true
+    })
+  },
+  onGenderSelectorClose: function(){
+    this.setData({genderSelectorShow: false})
+  },
+  onGenderSelectorSelect: function(event){
+    let gender = event.detail
+    this.setData({genderValue: gender.name, genderSelectorShow: false, "formData.gender": gender.id})
+  },
 
   // 选择学校
   onSelectSchoolShow: function(){
+    if (this.data.isComplete == 1){
+      return;
+    }
     this.setData({schoolSelectorShow: true})
   },
   schoolSelectorClose: function(){
@@ -91,6 +170,9 @@ Page({
 
   // 院系选择
   onSelectDepartmentShow: function(){
+    if (this.data.isComplete == 1){
+      return;
+    }
     _service.getDepartmentList(this)
   },
   onDepartmentSelectorClose: function(){
@@ -116,6 +198,9 @@ Page({
 
   // 专业选择
   onSelectMajorShow: function(){
+    if (this.data.isComplete == 1){
+      return;
+    }
     _service.getMajorList(this)
   },
   onMajorSelectorClose: function(){
@@ -140,6 +225,9 @@ Page({
 
   // 班级选择
   onSelectClassShow: function(){
+    if (this.data.isComplete == 1){
+      return;
+    }
     _service.getClassList(this)
   },
   onClassSelectorClose: function(){
@@ -150,7 +238,41 @@ Page({
     this.setData({className: _class.name, classSelectorShow: false, "formData.classId": _class.id})
   },
 
-  submit(){
+  // 选择身份
+  onSelectIdentityShow: function(){
+    if (this.data.isComplete == 1){
+      return;
+    }
+    this.setData({
+      identitySelectorShow: true
+    })
+  },
+  onIdentitySelectorClose: function(){
+    this.setData({identitySelectorShow: false})
+  },
+  onIdentitySelectorSelect: function(event){
+    let identity = event.detail
+    this.setData({identityValue: identity.name, identitySelectorShow: false, "formData.identity": identity.id})
+  },
+
+  // 完善用户信息
+  submit: function(){
+    let openid = wx.getStorageSync('openid');
+    this.setData({
+      "formData.openid": openid,
+      submitModalShow: true,
+    })
+  },
+  submitModalHandelOk: function(){
+    this.setData({
+      submitModalShow: false,
+    })
+    _service.completeUserInfo(this.data.formData, this)
+  },
+  submitModalHandelNo: function() {
+    this.setData({
+      submitModalShow: false,
+    })
   },
 
   /**
@@ -158,6 +280,7 @@ Page({
    */
   onLoad: function (options) {
     _service.getSchoolList(this)
+    _service.getCompleteUserInfo(this)
 
   },
 

@@ -1,0 +1,30 @@
+<!--pages/leave/leave.wxml-->
+<view>
+    <view id="leaveForm">
+        <van-cell-group title="消息类型--工作台--请假">
+            <van-cell title="请假类型" bind:click="onSelectShow" value="事假"/>
+            <van-cell title="选择日期区间" value="2020/04/18-2020/04/20" bind:click="onDateShow" />
+            <van-cell title="请假时长" value="2天" />
+            <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+            <van-cell title="说明附件："/>
+            <van-uploader
+                    disabled
+                    accept="all"
+                    file-list="{{ fileList }}"
+                    bind:after-read="afterRead"
+                    max-count="3"
+                    upload-text="点击查看附件"
+                    upload-icon="more-o"
+                    bindtap="try"
+            />
+            <van-cell title="审核状态" value="已审核" />
+            <van-cell title="审核时间" value="2020/04/18 18:00" />
+            <van-cell title="审核人" value="季军杰" />
+            <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+        </van-cell-group>
+    </view>
+
+    <i-modal visible="{{ modalVisible }}" bind:ok="modalHandelOk" bind:cancel="modalHandelNo">
+        <view>出现错误了，是否反馈给开发人员</view>
+    </i-modal>
+</view>

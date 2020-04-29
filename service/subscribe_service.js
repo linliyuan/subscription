@@ -2,7 +2,7 @@ import config from '../utils/config'
 import util from '../utils/util'
 
 
-const requestSubscribe = function(){
+const wxSubscribe = function(app){
     return new Promise((resolve, reject) => {
         wx.requestSubscribeMessage({
             tmplIds: ["z-raFxtQPN04ZtEGrOn2_rhy5QVZ3qng3yM3gm1koIQ"],
@@ -11,24 +11,36 @@ const requestSubscribe = function(){
                     wx.showToast({
                         title: '订阅OK！',
                         duration: 1000,
-                        success(data) {
-                            //成功
-                            resolve()
-                        }
                     })
+                    resolve(true)
+                }else {
+                    resolve(false)
                 }
             },
             fail(err) {
                 //失败
+                resolve(false)
                 console.error(err);
-                reject()
             }
         })
     })
 }
 
+const requestSubscribe = function(app, subscribeStatus){
+    let openid = wx.getStorageSync('openid');
+    util._asyncPost(
+        "/user/change_subscribe_status",
+        {
+            openid: openid,
+            subscribeStatus: subscribeStatus
+        },
+        app
+    )
+}
+
 module.exports = {
-    requestSubscribe: requestSubscribe
+    wxSubscribe: wxSubscribe,
+    requestSubscribe: requestSubscribe,
 }
 
 

@@ -1,7 +1,34 @@
 <!--pages/user_info_complete/user_info_complete.wxml-->
 <view>
+    <i-notice-bar icon="systemprompt" loop speed="3000">
+        学籍信息只能绑定一次，请认真选择
+    </i-notice-bar>
     <view id="userInfoForm">
         <van-cell-group title="基础信息">
+            <van-cell title="昵称" value="{{nickName}}"/>
+            <van-field
+                    value="{{ realName }}"
+                    label="真实姓名"
+                    placeholder="请输入真实姓名"
+                    required
+                    bind:blur="onRealNameChange"
+            />
+            <van-field
+                    value="{{ miniPhone }}"
+                    label="手机号码"
+                    placeholder="请输入手机号码"
+                    required
+                    type="number"
+                    bind:blur="onMiniPhoneChange"
+            />
+
+            <picker mode="date" value="{{date}}" start="1900-01-01" end="{{today}}" bindchange="bindDateChange">
+                <view class="picker">
+                    <van-cell title="出生日期" value="{{ birthday }}"/>
+                </view>
+            </picker>
+
+            <van-cell  required is-link title="性别" bind:click="onSelectGenderShow" value="{{genderValue}}"/>
         </van-cell-group>
 
         <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
@@ -11,6 +38,7 @@
             <van-cell required is-link title="院系" bind:click="onSelectDepartmentShow" value="{{ departmentName }}"/>
             <van-cell required is-link title="专业" bind:click="onSelectMajorShow" value="{{ majorName }}"/>
             <van-cell required is-link title="班级" bind:click="onSelectClassShow" value="{{ className }}"/>
+            <van-cell  required is-link title="身份" bind:click="onSelectIdentityShow" value="{{identityValue}}"/>
         </van-cell-group>
         <van-button type="info" bind:click="submit" block="true" size="large" round>提交</van-button>
     </view>
@@ -18,7 +46,18 @@
 
 
 <!--    // 下拉显示列表-->
-<!--    // 学校类型选择-->
+<!--    性别类型选择-->
+    <van-action-sheet
+            show="{{ genderSelectorShow }}"
+            actions="{{ genderColumns }}"
+            show-toolbar="true"
+            toolbar-position="top"
+            confirm-button-text="确认"
+            bind:close="onGenderSelectorClose"
+            bind:select="onGenderSelectorSelect"
+    />
+
+    <!--    // 学校类型选择-->
     <van-popup show="{{ schoolSelectorShow }}" bind:close="schoolSelectorClose" position="bottom" >
         <van-picker columns="{{ schoolColumns }}" show-toolbar="true" toolbar-position="top" confirm-button-text="确认" bind:change="onSchoolPickerChange" bind:confirm="onSchoolPickerConfirm" bind:cancel="onSchoolPickerCancel" />
     </van-popup>
@@ -48,7 +87,23 @@
             bind:select="onClassSelectorSelect"
     />
 
-<!--    // 接错误提示-->
+    <!--    身份选择类型选择-->
+    <van-action-sheet
+            show="{{ identitySelectorShow }}"
+            actions="{{ identityColumns }}"
+            show-toolbar="true"
+            toolbar-position="top"
+            confirm-button-text="确认"
+            bind:close="onIdentitySelectorClose"
+            bind:select="onIdentitySelectorSelect"
+    />
+
+
+    <!--    提交提示-->
+    <i-modal visible="{{ submitModalShow }}" bind:ok="submitModalHandelOk" bind:cancel="submitModalHandelNo">
+        <view>学籍信息只能填写一次，请确认信息无误再提交</view>
+    </i-modal>
+    <!--    // 接错误提示-->
     <i-modal visible="{{ modalVisible }}" bind:ok="modalHandelOk" bind:cancel="modalHandelNo">
         <view>出现错误了，是否反馈给开发人员</view>
     </i-modal>

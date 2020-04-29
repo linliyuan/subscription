@@ -3,14 +3,14 @@
     <view id="leaveForm">
         <van-cell-group>
             <van-cell required is-link title="请假类型" bind:click="onSelectShow" value="{{ leaveTypeValue }}"/>
-            <van-cell required title="选择日期区间" value="{{ leaveDate }}" bind:click="onDateShow" />
+            <van-cell required is-link  title="选择日期区间" value="{{ leaveDate }}" bind:click="onDateShow" />
             <van-calendar
                     show="{{ leaveDateShow }}"
                     type="range"
                     bind:close="onDateClose"
                     bind:confirm="onConfirm"
             />
-            <van-cell required title="请假时长" value="{{ leaveDays }}" />
+            <van-cell required is-link  title="请假时长" value="{{ leaveDays }}" />
             <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
             <van-field
                     value="{{ leaveRemark }}"
@@ -32,6 +32,7 @@
                     upload-text="上传附件"
                     upload-icon="more-o"
             />
+            <van-cell required is-link  title="审核人" value="季军杰" />
             <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
         </van-cell-group>
         <van-button type="info" bind:click="submit" block="true" size="large" round>提交申请</van-button>

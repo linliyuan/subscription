@@ -1,8 +1,9 @@
 <!--pages/test/test.wxml-->
-<van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
-<van-calendar
-        show="{{ show }}"
-        type="range"
-        bind:close="onClose"
-        bind:confirm="onConfirm"
-/>
+<view>
+    <view>日期选择器</view>
+    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+        <view class="picker">
+            当前选择: {{date}}
+        </view>
+    </picker>
+</view>
