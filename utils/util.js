@@ -127,6 +127,11 @@ function dateToDateString(date) {
   return year + "-" + month + "-" + day
 }
 
+// time单位毫秒
+const sleep = function(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 module.exports = {
   _post: _post,
   _asyncPost: _asyncPost,
@@ -134,5 +139,6 @@ module.exports = {
   modalHandelOk: modalHandelOk,
   modalHandelNo: modalHandelNo,
   formatDate: formatDate,
-  dateToDateString: dateToDateString
+  dateToDateString: dateToDateString,
+  sleep: sleep
 };

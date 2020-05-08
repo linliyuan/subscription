@@ -2,7 +2,10 @@
 <view>
     <view class="work-grid">
         <van-grid column-num="3" border="true" center="true" square >
-            <van-grid-item wx:for="{{ workSetList }}" wx:for-item="workSet" wx:key="index" link-type="redirectTo" url="{{ workSet.page }}" icon="{{ workSet.icon }}" text="{{ workSet.text }}"/>
+            <van-grid-item
+                    wx:for="{{ workSetList }}" wx:for-item="workSet" wx:key="index"
+                    link-type="redirectTo" url="{{ workSet.page }}"
+                    icon="{{ workSet.icon }}" text="{{ workSet.text }}"/>
         </van-grid>
     </view>
 

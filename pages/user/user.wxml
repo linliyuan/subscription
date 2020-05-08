@@ -27,9 +27,12 @@
             <i-cell title="接收消息">
                 <i-switch value="{{subscribeStatus}}" bind:change="switchSubscribeMessage" slot="footer"></i-switch>
             </i-cell>
-            <van-cell icon="completed" title="完善个人信息" is-link link-type="navigateTo" url="/pages/user_info_complete/user_info_complete" />
-            <van-cell icon="setting-o" title="设置" is-link link-type="navigateTo" url="/pages/dashboard/index" />
-            <van-cell icon="envelop-o" title="意见反馈" is-link link-type="navigateTo" url="/pages/dashboard/index" />
+            <van-cell icon="completed" title="完善个人信息"
+                      is-link link-type="navigateTo" url="/pages/user_info_complete/user_info_complete" />
+            <van-cell icon="setting-o" title="设置" is-link
+                      link-type="navigateTo" url="/pages/dashboard/index" />
+            <van-cell icon="envelop-o" title="意见反馈" is-link
+                      link-type="navigateTo" url="/pages/dashboard/index" />
         </van-cell-group>
     </view>
     <view class="tab-bottom">

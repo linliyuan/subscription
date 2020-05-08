@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/leave/leave",
+    "pages/search_user/search_user",
     "pages/user/user",
     "pages/user_info_complete/user_info_complete",
     "pages/test/test",
     "pages/msg_detail/msg_detail",
-    "pages/leave/leave",
     "pages/index/index",
     "pages/msg/msg",
     "pages/group/group",

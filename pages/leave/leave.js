@@ -31,7 +31,13 @@ Page({
                 name: '其他',
             }
         ],
-        fileList: ["https://subscription-oss.oss-cn-beijing.aliyuncs.com/2020-04-25-140747-vCW4OJ.jpeg"]
+        fileList: ["https://subscription-oss.oss-cn-beijing.aliyuncs.com/2020-04-25-140747-vCW4OJ.jpeg"],
+        verifierId: 0,
+        verifierColumns: [],
+        verifierSelectorShow: false,
+        verifierList: [],
+        verifierSelectorLoading: false,
+        verifierListShow: []
     },
     // 上传文件
     afterRead(event) {
@@ -109,31 +115,70 @@ Page({
         console.log(data.detail)
     },
 
+    // 设置审核人
+    onVerifierShow: async function(){
+        console.log("onVerifierShow")
+        this.setData({
+            verifierSelectorShow: true,
+            verifierSelectorLoading: true,
+        })
+        let openid = wx.getStorageSync('openid');
+        let res = await util._asyncPost(
+            "/user/teacher_list",
+            {
+                "openid": openid
+        },this)
+        console.log("res",res)
+
+        let teacherListShow = res.teacher_list_show
+        let teacherList = res.teacher_list
+        let first = teacherListShow[Object.keys(teacherListShow)[0]]
+        let teacherColumns = [
+            {
+                values: Object.keys(teacherListShow),
+                className: 'column1'
+            },
+            {
+                values: first,
+                className: 'column2',
+                defaultIndex: 0
+            }
+        ]
+        this.setData({
+            verifierColumns: teacherColumns,
+            verifierList: teacherList,
+            verifierSelectorLoading: false,
+            verifierListShow: teacherListShow
+        })
+        console.log(this.data.verifierSelectorShow)
+    },
+    verifierSelectorClose: function(){
+        this.setData({verifierSelectorShow: false})
+    },
+    onVerifierPickerChange: function(event) {
+        const { picker, value, index } = event.detail;
+        picker.setColumnValues(1, this.data.verifierListShow[value[0]]);
+    },
+    onVerifierPickerConfirm: function(event){
+        const { value, index } = event.detail
+        console.log(value,"value")
+        console.log(index, "index")
+        if(this.data.verifierId !== this.data.verifierList[value[0]][index[1]].id){
+            this.setData({
+                verifierId: this.data.verifierList[value[0]][index[1]].userId,
+                verifier: value[1],
+            })
+        }
+        this.setData({verifierSelectorShow: false})
+    },
+    onSchoolPickerCancel: function(){
+        this.setData({verifierSelectorShow:false})
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      // console.log("xixi")
-      // wx.downloadFile({
-      //   // 示例 url，并非真实存在
-      //   url: 'https://subscription-oss.oss-cn-beijing.aliyuncs.com/2020-04-26-003046-KFL4Da.xlsx',
-      //   success: function (res) {
-      //     console.log("ooooo")
-      //     const filePath = res.tempFilePath
-      //     wx.openDocument({
-      //       filePath: filePath,
-      //       success: function (res) {
-      //         console.log('打开文档成功')
-      //       },
-      //       fail: function(res){
-      //         console.log(res)
-      //       }
-      //     })
-      //   },
-      //   fail: function (res) {
-      //     console.log(res)
-      //   }
-      // })
     },
 
     /**

@@ -32,9 +32,14 @@
                     upload-text="上传附件"
                     upload-icon="more-o"
             />
-            <van-cell required is-link  title="审核人" value="季军杰" />
             <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+            <van-cell required is-link  title="审核人"  bind:click="onVerifierShow" value="{{ verifier }}" />
+            <!--  选择审核人 -->
+            <van-popup show="{{ verifierSelectorShow }}" bind:close="verifierSelectorClose" position="bottom">
+                <van-picker columns="{{ verifierColumns }}"  loading="{{ verifierSelectorLoading }}"  show-toolbar="true" toolbar-position="top" confirm-button-text="确认" bind:change="onVerifierPickerChange" bind:confirm="onVerifierPickerConfirm" bind:cancel="onVerifierPickerCancel" />
+            </van-popup>
         </van-cell-group>
+        <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
         <van-button type="info" bind:click="submit" block="true" size="large" round>提交申请</van-button>
     </view>
 

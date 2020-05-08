@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "搜索用户",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-search": "@vant/weapp/search/index",
+    "i-card": "/components/iview_weapp/card/index",
+    "van-cell-group": "@vant/weapp/cell-group/index"
+
+  }
+}

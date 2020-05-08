@@ -1,0 +1,26 @@
+<!--pages/search_user/search_user.wxml-->
+<view>
+    <van-search
+            value="{{ value }}"
+            placeholder="请输入搜索关键词"
+            background="#fff"
+            use-action-slot
+            bind:change="onChange"
+            bind:search="onSearch"
+            shape="round"
+    >
+        <view slot="action" bind:tap="onClick">搜索</view>
+    </van-search>
+    <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+    <van-cell-group title="已订阅用户">
+
+    </van-cell-group>
+    <view style="background-color: #f7f8fa;height: 15px;width: 100%"></view>
+    <van-cell-group title="未订阅用户">
+        <i-card title="昵称：星星" extra="真实姓名：周**" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+            <view slot="content">
+                <van-button icon="https://img.yzcdn.cn/vant/logo.png" type="info">订阅</van-button>
+            </view>
+        </i-card>
+    </van-cell-group>
+</view>
